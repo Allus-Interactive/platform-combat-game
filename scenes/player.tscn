@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8g1576p2mopw"]
+
+[ext_resource type="Texture2D" uid="uid://be3s4omjm56i6" path="res://assets/player/player_idle/player_idle_1.png" id="1_pg8ym"]
+[ext_resource type="Texture2D" uid="uid://jecxe35byw65" path="res://assets/player/player_idle/player_idle_2.png" id="2_7lx33"]
+[ext_resource type="Texture2D" uid="uid://cvmaaqhsq5sqg" path="res://assets/player/player_idle/player_idle_3.png" id="3_yi56o"]
+[ext_resource type="Texture2D" uid="uid://b0guypuquvley" path="res://assets/player/player_idle/player_idle_4.png" id="4_g1cm6"]
+[ext_resource type="Texture2D" uid="uid://b3vb5m0hejwov" path="res://assets/player/player_idle/player_idle_5.png" id="5_qvfjk"]
+[ext_resource type="Texture2D" uid="uid://d31i13vys2j7h" path="res://assets/player/player_idle/player_idle_6.png" id="6_7nmw4"]
+[ext_resource type="Texture2D" uid="uid://b8cqi4ske5vm7" path="res://assets/player/player_idle/player_idle_7.png" id="7_rwiwb"]
+[ext_resource type="Texture2D" uid="uid://be3taj827oykj" path="res://assets/player/player_idle/player_idle_8.png" id="8_qv2yt"]
+[ext_resource type="Texture2D" uid="uid://mj8c4srioopk" path="res://assets/player/player_idle/player_idle_9.png" id="9_r5cx7"]
+[ext_resource type="Texture2D" uid="uid://bdh3hwms50sn7" path="res://assets/player/player_idle/player_idle_0.png" id="10_dtmxd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_avchm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pg8ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7lx33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yi56o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_g1cm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qvfjk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7nmw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rwiwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qv2yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_r5cx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dtmxd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_avchm")
+animation = &"idle"
+frame = 4
+frame_progress = 0.386333
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
