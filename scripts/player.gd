@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed : float = 200.0
+@export var roll_speed : float = 300.0
 @export var jump_velocity : float = -200.0
 @export var double_jump_velocity : float = -150.0
 
@@ -14,10 +15,12 @@ var animation_locked : bool = false
 var was_in_air : bool = false
 var is_at_jump_peak : bool = false
 var is_falling : bool = false
+var is_facing_right : bool = true
 
 var direction : Vector2 = Vector2.ZERO
 
 func _physics_process(delta):
+	print_debug("velocity x: ", velocity.x)
 	if not is_on_floor():
 		# Add the gravity
 		velocity.y += gravity * delta
@@ -54,11 +57,17 @@ func _physics_process(delta):
 			animation_locked = true
 			is_falling = true
 	
+	# Handle Roll
+	if Input.is_action_just_pressed("roll") && is_on_floor():
+		roll()
+	
 	# Get the input direction and handle the movement/deceleration
 	direction = Input.get_vector("move_left", "move_right", "ui_up", "ui_down")
 	
-	if direction.x != 0 && animated_sprite.animation != "jump_land":
+	if direction.x != 0 && animated_sprite.animation != "jump_land" && animated_sprite.animation != "roll":
 		velocity.x = direction.x * speed
+	elif animated_sprite.animation == "roll":
+		pass
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
@@ -76,9 +85,11 @@ func update_animation():
 func update_direction():
 	if direction.x > 0:
 		# Player facing right
+		is_facing_right = true
 		animated_sprite.flip_h = false
 	elif direction.x < 0:
 		# Player facing left
+		is_facing_right = false
 		animated_sprite.flip_h = true
 
 func jump():
@@ -104,8 +115,23 @@ func land():
 	animated_sprite.play("jump_land")
 	animation_locked = true
 
+func roll():
+	# Play roll anim and lock anims
+	animated_sprite.play("roll")
+	animation_locked = true
+	# Set velocity based on direction player is facing
+	if is_facing_right:
+		velocity.x = roll_speed
+	else:
+		velocity.x = -roll_speed
+
 func _on_animated_sprite_2d_animation_finished():
 	# Call when any anim finishes
 	if animated_sprite.animation == "jump_land":
 		# Only run this when jump land anim is finished
 		animation_locked = false
+	
+	if animated_sprite.animation == "roll":
+		# Only run this when roll anim is finished
+		animation_locked = false
+
