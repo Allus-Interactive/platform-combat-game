@@ -16,11 +16,11 @@ var was_in_air : bool = false
 var is_at_jump_peak : bool = false
 var is_falling : bool = false
 var is_facing_right : bool = true
+var has_weapon : bool = false
 
 var direction : Vector2 = Vector2.ZERO
 
 func _physics_process(delta):
-	print_debug("velocity x: ", velocity.x)
 	if not is_on_floor():
 		# Add the gravity
 		velocity.y += gravity * delta
@@ -58,8 +58,12 @@ func _physics_process(delta):
 			is_falling = true
 	
 	# Handle Roll
-	if Input.is_action_just_pressed("roll") && is_on_floor():
+	if Input.is_action_just_pressed("roll") && is_on_floor() && not has_weapon:
 		roll()
+	
+	# Handle Weapon Toggle
+	if Input.is_action_just_pressed("toggle_weapon") && animated_sprite.animation != "roll":
+		toggle_weapon()
 	
 	# Get the input direction and handle the movement/deceleration
 	direction = Input.get_vector("move_left", "move_right", "ui_up", "ui_down")
@@ -77,10 +81,17 @@ func _physics_process(delta):
 
 func update_animation():
 	if not animation_locked:
-		if direction.x != 0:
-			animated_sprite.play("run")
+		if not has_weapon:
+			if direction.x != 0:
+				animated_sprite.play("run")
+			else:
+				animated_sprite.play("idle")
 		else:
-			animated_sprite.play("idle")
+			if direction.x != 0:
+				animated_sprite.play("run_sword")
+			else:
+				animated_sprite.play("idle_sword")
+			
 
 func update_direction():
 	if direction.x > 0:
@@ -124,6 +135,12 @@ func roll():
 		velocity.x = roll_speed
 	else:
 		velocity.x = -roll_speed
+
+func toggle_weapon():
+	if has_weapon:
+		has_weapon = false
+	else:
+		has_weapon= true
 
 func _on_animated_sprite_2d_animation_finished():
 	# Call when any anim finishes
