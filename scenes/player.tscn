@@ -338,9 +338,9 @@ script = ExtResource("1_ugb0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kqucp")
-animation = &"jump_land"
+animation = &"roll"
 autoplay = "idle"
-frame = 8
+frame = 6
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
