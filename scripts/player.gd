@@ -21,6 +21,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		# Add the gravity
 		velocity.y += gravity * delta
+		# Player is in the air
 		was_in_air = true
 	else:
 		# Land on the ground
@@ -35,21 +36,22 @@ func _physics_process(delta):
 	# Handle Jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			# Normal Jump
 			jump()
 		elif not has_double_jumped:
-			# Double Jump
-			velocity.y = double_jump_velocity
-			has_double_jumped = true
+			double_jump()
 	
 	# Handle jump animations
 	if not is_on_floor():
 		if velocity.y > -25 && velocity.y < 25 && not is_at_jump_peak:
+			# Player is at peak of jump
 			animated_sprite.play("jump_middle")
+			animation_locked = true
 			is_at_jump_peak = true
 		
 		if velocity.y > 25 && not is_falling:
+			# Player is falling
 			animated_sprite.play("jump_end")
+			animation_locked = true
 			is_falling = true
 	
 	# Get the input direction and handle the movement/deceleration
@@ -73,12 +75,28 @@ func update_animation():
 
 func update_direction():
 	if direction.x > 0:
+		# Player facing right
 		animated_sprite.flip_h = false
 	elif direction.x < 0:
+		# Player facing left
 		animated_sprite.flip_h = true
 
 func jump():
+	# Set y velocity to jump
 	velocity.y = jump_velocity
+	# Play jump start anim and lock anims
+	animated_sprite.play("jump_start")
+	animation_locked = true
+
+func double_jump():
+	# Set y velocity to double jump
+	velocity.y = double_jump_velocity
+	# Set bool to avoid endless double jumps
+	has_double_jumped = true
+	# Reset bools to allow for jump middle and end anims to play
+	is_at_jump_peak = false
+	is_falling = false
+	# Play start anim and lock anims
 	animated_sprite.play("jump_start")
 	animation_locked = true
 
@@ -87,5 +105,7 @@ func land():
 	animation_locked = true
 
 func _on_animated_sprite_2d_animation_finished():
+	# Call when any anim finishes
 	if animated_sprite.animation == "jump_land":
+		# Only run this when jump land anim is finished
 		animation_locked = false
