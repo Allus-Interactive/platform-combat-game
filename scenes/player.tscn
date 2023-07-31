@@ -256,7 +256,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump_land",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -338,8 +338,10 @@ script = ExtResource("1_ugb0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kqucp")
-animation = &"jump_middle"
+animation = &"jump_land"
 autoplay = "idle"
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 2)
