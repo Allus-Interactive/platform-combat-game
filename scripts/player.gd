@@ -25,7 +25,9 @@ func _physics_process(delta):
 			velocity.y = jump_velocity
 		elif not has_double_jumped:
 			# Double Jump
-			velocity.y = double_jump_velocity
+			# += instead of = to add to velocity of first jump
+			# enables higher double jump
+			velocity.y += double_jump_velocity
 			has_double_jumped = true
 
 	# Get the input direction and handle the movement/deceleration
