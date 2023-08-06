@@ -12,11 +12,9 @@ func _ready():
 	for child in get_children():
 		if child is PlayerState:
 			states.append(child)
-			
 			# Set the states up with what they need to function
 			child.character = character
 			child.playback = animation_tree["parameters/playback"]
-			
 		else:
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
 
@@ -28,6 +26,9 @@ func _physics_process(delta):
 
 func check_if_can_move():
 	return current_state.can_move
+
+func check_if_is_rolling():
+	return current_state.is_rolling
 
 func switch_states(new_state : PlayerState):
 	if current_state != null:
