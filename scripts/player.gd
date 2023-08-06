@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var speed : float = 200.0
-@export var roll_speed : float = 300.0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -20,15 +19,13 @@ func _physics_process(delta):
 		# Add the gravity
 		velocity.y += gravity * delta
 	
-	# Handle Roll
-	# if Input.is_action_just_pressed("roll") && is_on_floor():
-	# 	roll()
-	
 	# Get the input direction and handle the movement/deceleration
 	direction = Input.get_vector("move_left", "move_right", "ui_up", "ui_down")
 	
 	if direction.x != 0 && state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
+	elif state_machine.check_if_is_rolling():
+		pass # do nothing, velocity is controlled in the roll function
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
@@ -44,13 +41,3 @@ func update_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
-
-func roll():
-	pass
-	# Play roll anim and lock anims
-	#animated_sprite.play("roll")
-	#if is_facing_right:
-	#	velocity.x = roll_speed
-	#else:
-	#	velocity.x = -roll_speed
-	
