@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var speed : float = 200.0
 @export var roll_speed : float = 300.0
-@export var jump_velocity : float = -200.0
 @export var double_jump_velocity : float = -150.0
 
 @onready var sprite : Sprite2D = $Sprite2D
@@ -44,7 +43,8 @@ func _physics_process(delta):
 	# Handle Jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			jump()
+			# jump()
+			pass
 		elif not has_double_jumped:
 			double_jump()
 	
@@ -96,13 +96,6 @@ func update_direction():
 		# Player facing left
 		is_facing_right = false
 		sprite.flip_h = true
-
-func jump():
-	# Set y velocity to jump
-	velocity.y = jump_velocity
-	# Play jump start anim and lock anims
-	#animated_sprite.play("jump_start")
-	animation_locked = true
 
 func double_jump():
 	# Set y velocity to double jump
