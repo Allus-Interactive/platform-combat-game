@@ -41,13 +41,11 @@ func double_jump():
 func handle_jump_animations():
 	if character.velocity.y > -25 && character.velocity.y < 25 && not is_at_jump_peak:
 		# Player is at peak of jump
-		print_debug("mid jump")
 		playback.travel(mid_jump_animation)
 		is_at_jump_peak = true
 	
 	if character.velocity.y > 25 && not is_falling:
 		# Player is falling
-		print_debug("end jump")
 		playback.travel(end_jump_animation)
 		is_falling = true
 
