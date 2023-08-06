@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=104 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -781,9 +781,50 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_fckc7"]
+resource_name = "double_jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_8t4y0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tww1j"]
 _data = {
 "RESET": SubResource("Animation_l65ve"),
+"double_jump": SubResource("Animation_fckc7"),
 "idle": SubResource("Animation_qqwf2"),
 "jump_end": SubResource("Animation_gixh5"),
 "jump_middle": SubResource("Animation_0uyda"),
@@ -810,13 +851,41 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_grlor")
 blend_point_2/pos = -1.0
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iynau"]
+animation = &"double_jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d6jne"]
+animation = &"jump_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfmla"]
+animation = &"landing"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qqjmo"]
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_37mn5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0n2rr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mphnc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pcccu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2isx4"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i05jk"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_n51sq")
 states/Move/position = Vector2(396, 100)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_qqjmo")]
+states/double_jump/node = SubResource("AnimationNodeAnimation_iynau")
+states/double_jump/position = Vector2(646, -13)
+states/jump_start/node = SubResource("AnimationNodeAnimation_d6jne")
+states/jump_start/position = Vector2(396, -13)
+states/landing/node = SubResource("AnimationNodeAnimation_rfmla")
+states/landing/position = Vector2(646, 100)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_qqjmo"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_37mn5"), "jump_start", "landing", SubResource("AnimationNodeStateMachineTransition_0n2rr"), "landing", "Move", SubResource("AnimationNodeStateMachineTransition_mphnc"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_pcccu"), "double_jump", "landing", SubResource("AnimationNodeStateMachineTransition_2isx4")]
+graph_offset = Vector2(-37, -51)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ugb0v")
