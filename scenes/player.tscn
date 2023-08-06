@@ -1,13 +1,38 @@
-[gd_scene load_steps=69 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=76 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
+[ext_resource type="Texture2D" uid="uid://cm6581bwt66gp" path="res://assets/player/player_attack.png" id="2_klygd"]
 [ext_resource type="Texture2D" uid="uid://bd8wxncq3oakj" path="res://assets/player/player_sword_idle.png" id="3_4wa07"]
 [ext_resource type="Texture2D" uid="uid://ck05eeigqk1ms" path="res://assets/player/player_jump.png" id="3_8t4y0"]
 [ext_resource type="Texture2D" uid="uid://ct656mj1ghofu" path="res://assets/player/player_land.png" id="4_7bvry"]
 [ext_resource type="Texture2D" uid="uid://docoxrsi7v0in" path="res://assets/player/player_run.png" id="4_pw4qu"]
 [ext_resource type="Texture2D" uid="uid://bxn2vhy32qafg" path="res://assets/player/player_roll.png" id="5_teqtv"]
 [ext_resource type="Texture2D" uid="uid://2sxea53vksow" path="res://assets/player/player_sword_run.png" id="8_3nr68"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52jci"]
+atlas = ExtResource("2_klygd")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u06hs"]
+atlas = ExtResource("2_klygd")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kufg3"]
+atlas = ExtResource("2_klygd")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5wfm"]
+atlas = ExtResource("2_klygd")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2mgk"]
+atlas = ExtResource("2_klygd")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljara"]
+atlas = ExtResource("2_klygd")
+region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oylc2"]
 atlas = ExtResource("2_2tdic")
@@ -245,6 +270,29 @@ region = Rect2(336, 0, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_52jci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u06hs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kufg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5wfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2mgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljara")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_oylc2")
 }, {
 "duration": 1.0,
@@ -476,10 +524,10 @@ script = ExtResource("1_ugb0v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kqucp")
-animation = &"run_sword"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.833972
+frame = 4
+frame_progress = 0.015243
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 2)
