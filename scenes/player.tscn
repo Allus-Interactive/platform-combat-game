@@ -925,12 +925,13 @@ animation_tree = NodePath("../AnimationTree")
 script = ExtResource("11_jhcou")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("12_k7mg6")
-ground_state = NodePath("../Ground")
+landing_state = NodePath("../Landing")
 
-[node name="Landing" type="Node" parent="CharacterStateMachine"]
+[node name="Landing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("13_n5rx8")
+ground_state = NodePath("../Ground")
 can_move = false
 
 [node name="State Debug Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
@@ -943,3 +944,4 @@ script = ExtResource("14_g4e7r")
 state_machine = NodePath("../CharacterStateMachine")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
