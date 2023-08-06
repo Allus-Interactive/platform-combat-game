@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var speed : float = 200.0
 @export var roll_speed : float = 300.0
-@export var double_jump_velocity : float = -150.0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -39,14 +38,6 @@ func _physics_process(delta):
 		was_in_air = false
 		is_at_jump_peak = false
 		is_falling = false
-	
-	# Handle Jump
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
-			# jump()
-			pass
-		elif not has_double_jumped:
-			double_jump()
 	
 	# Handle jump animations
 	if not is_on_floor():
@@ -96,18 +87,6 @@ func update_direction():
 		# Player facing left
 		is_facing_right = false
 		sprite.flip_h = true
-
-func double_jump():
-	# Set y velocity to double jump
-	velocity.y = double_jump_velocity
-	# Set bool to avoid endless double jumps
-	has_double_jumped = true
-	# Reset bools to allow for jump middle and end anims to play
-	is_at_jump_peak = false
-	is_falling = false
-	# Play start anim and lock anims
-	#animated_sprite.play("jump_start")
-	animation_locked = true
 
 func land():
 	#animated_sprite.play("jump_land")
