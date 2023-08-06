@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
+@onready var state_machine : CharacterStateMachine = $CharacterStateMachine
 
 # Get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -72,7 +73,7 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration
 	direction = Input.get_vector("move_left", "move_right", "ui_up", "ui_down")
 	
-	if direction.x != 0:
+	if direction.x != 0 && state_machine.check_if_can_move():
 		velocity.x = direction.x * speed
 	#elif animated_sprite.animation == "roll":
 		#pass
