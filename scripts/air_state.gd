@@ -3,11 +3,11 @@ extends PlayerState
 class_name Airstate
 
 @export var ground_state : PlayerState
-@export var double_jump_velocity : float = -100.0
+@export var double_jump_velocity : float = -150.0
 
 var has_double_jumped : bool = false
 
-func state_process(delta):
+func state_process(_delta):
 	if character.is_on_floor():
 		next_state = ground_state
 

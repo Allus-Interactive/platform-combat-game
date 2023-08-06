@@ -2,7 +2,7 @@ extends PlayerState
 
 class_name GroundState
 
-@export var jump_velocity : float = -150.0
+@export var jump_velocity : float = -200.0
 @export var air_state : PlayerState
 
 func state_input(event : InputEvent):
