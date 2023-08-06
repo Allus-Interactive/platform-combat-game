@@ -7,6 +7,9 @@ class_name PlayerState
 var character : CharacterBody2D
 var next_state : PlayerState
 
+func state_process(_delta):
+	pass
+
 func state_input(_event  : InputEvent):
 	pass
 

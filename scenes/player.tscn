@@ -690,8 +690,9 @@ current_state = NodePath("Ground")
 script = ExtResource("11_jhcou")
 air_state = NodePath("../Air")
 
-[node name="Air" type="Node" parent="CharacterStateMachine"]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
 script = ExtResource("12_k7mg6")
+ground_state = NodePath("../Ground")
 
 [node name="Landing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_n5rx8")

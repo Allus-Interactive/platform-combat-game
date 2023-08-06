@@ -18,9 +18,11 @@ func _ready():
 		else:
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if current_state.next_state != null:
 		switch_states(current_state.next_state)
+	
+	current_state.state_process(delta)
 
 func check_if_can_move():
 	return current_state.can_move
