@@ -4,6 +4,7 @@ class_name Airstate
 
 @export var ground_state : PlayerState
 @export var double_jump_velocity : float = -150.0
+@export var double_jump_animation : String = "double_jump"
 
 var has_double_jumped : bool = false
 
@@ -20,7 +21,6 @@ func on_exit():
 		has_double_jumped = false
 
 func double_jump():
-	# Set y velocity to double jump
 	character.velocity.y = double_jump_velocity
-	# Set bool to avoid endless double jumps
+	playback.travel(double_jump_animation)
 	has_double_jumped = true
