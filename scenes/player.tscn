@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=57 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/roll_state.gd" id="10_pxfph"]
 [ext_resource type="Script" path="res://scripts/ground_state.gd" id="11_jhcou"]
 [ext_resource type="Script" path="res://scripts/air_state.gd" id="12_k7mg6"]
+[ext_resource type="Script" path="res://scripts/attack-state.gd" id="13_cia2r"]
 [ext_resource type="Script" path="res://scripts/landing_state.gd" id="13_n5rx8"]
 [ext_resource type="Script" path="res://scripts/state_debug_label.gd" id="14_g4e7r"]
 
@@ -469,6 +470,12 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_grlor")
 blend_point_2/pos = -1.0
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7p376"]
+animation = &"attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dfivo"]
+animation = &"attack_2"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iynau"]
 animation = &"double_jump"
 
@@ -516,9 +523,21 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dx0g2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6huml"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w6oaf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i7kw8"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i05jk"]
 states/Move/node = SubResource("AnimationNodeBlendSpace1D_n51sq")
 states/Move/position = Vector2(396, 100)
+states/attack_1/node = SubResource("AnimationNodeAnimation_7p376")
+states/attack_1/position = Vector2(396, 239)
+states/attack_2/node = SubResource("AnimationNodeAnimation_dfivo")
+states/attack_2/position = Vector2(646, 239)
 states/double_jump/node = SubResource("AnimationNodeAnimation_iynau")
 states/double_jump/position = Vector2(396, -112)
 states/jump_end/node = SubResource("AnimationNodeAnimation_j4r5x")
@@ -530,8 +549,8 @@ states/jump_start/position = Vector2(396, -13)
 states/landing/node = SubResource("AnimationNodeAnimation_rfmla")
 states/landing/position = Vector2(646, 100)
 states/roll/node = SubResource("AnimationNodeAnimation_cy70t")
-states/roll/position = Vector2(396, 224)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_qqjmo"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_37mn5"), "landing", "Move", SubResource("AnimationNodeStateMachineTransition_mphnc"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_pcccu"), "jump_start", "jump_middle", SubResource("AnimationNodeStateMachineTransition_wnb84"), "jump_middle", "jump_end", SubResource("AnimationNodeStateMachineTransition_1hkf2"), "jump_end", "landing", SubResource("AnimationNodeStateMachineTransition_7ugl3"), "double_jump", "jump_middle", SubResource("AnimationNodeStateMachineTransition_qlm1h"), "jump_middle", "double_jump", SubResource("AnimationNodeStateMachineTransition_6itin"), "jump_end", "double_jump", SubResource("AnimationNodeStateMachineTransition_usg82"), "Move", "roll", SubResource("AnimationNodeStateMachineTransition_adj4n"), "roll", "Move", SubResource("AnimationNodeStateMachineTransition_2px0g")]
+states/roll/position = Vector2(200, 239)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_qqjmo"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_37mn5"), "landing", "Move", SubResource("AnimationNodeStateMachineTransition_mphnc"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_pcccu"), "jump_start", "jump_middle", SubResource("AnimationNodeStateMachineTransition_wnb84"), "jump_middle", "jump_end", SubResource("AnimationNodeStateMachineTransition_1hkf2"), "jump_end", "landing", SubResource("AnimationNodeStateMachineTransition_7ugl3"), "double_jump", "jump_middle", SubResource("AnimationNodeStateMachineTransition_qlm1h"), "jump_middle", "double_jump", SubResource("AnimationNodeStateMachineTransition_6itin"), "jump_end", "double_jump", SubResource("AnimationNodeStateMachineTransition_usg82"), "Move", "roll", SubResource("AnimationNodeStateMachineTransition_adj4n"), "roll", "Move", SubResource("AnimationNodeStateMachineTransition_2px0g"), "Move", "attack_1", SubResource("AnimationNodeStateMachineTransition_dx0g2"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_6huml"), "attack_1", "Move", SubResource("AnimationNodeStateMachineTransition_w6oaf"), "attack_2", "Move", SubResource("AnimationNodeStateMachineTransition_i7kw8")]
 graph_offset = Vector2(33, -181)
 
 [node name="Player" type="CharacterBody2D"]
@@ -562,10 +581,11 @@ character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "roll_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "roll_state", "attack_state")]
 script = ExtResource("11_jhcou")
 air_state = NodePath("../Air")
 roll_state = NodePath("../Roll")
+attack_state = NodePath("../Attack")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("12_k7mg6")
@@ -581,6 +601,10 @@ script = ExtResource("10_pxfph")
 ground_state = NodePath("../Ground")
 can_move = false
 is_rolling = true
+
+[node name="Attack" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("13_cia2r")
+can_move = false
 
 [node name="State Debug Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -51.0

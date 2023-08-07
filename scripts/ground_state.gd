@@ -6,8 +6,10 @@ class_name GroundState
 @export var roll_speed : float = 400.0
 @export var air_state : PlayerState
 @export var roll_state : PlayerState
+@export var attack_state : PlayerState
 @export var jump_animation : String = "jump_start"
 @export var roll_animation : String = "roll"
+@export var attack_animation : String = "attack_1"
 
 var is_facing_right : bool = true
 
@@ -25,6 +27,8 @@ func state_input(event : InputEvent):
 		jump()
 	if event.is_action_pressed("roll"):
 		roll()
+	if event.is_action_pressed("attack"):
+		attack()
 
 func jump():
 	character.velocity.y = jump_velocity
@@ -39,3 +43,8 @@ func roll():
 		character.velocity.x = -roll_speed
 	next_state = roll_state
 	playback.travel(roll_animation)
+
+func attack():
+	next_state = attack_state
+	playback.travel(attack_animation)
+
