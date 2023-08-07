@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cm8exbu7yrhd2"]
+[gd_scene load_steps=7 format=3 uid="uid://cm8exbu7yrhd2"]
 
 [ext_resource type="Texture2D" uid="uid://d0tt1tfpdc81s" path="res://assets/enemies/snail/walk-Sheet.png" id="1_2854r"]
+[ext_resource type="Script" path="res://scripts/enemies/damageable.gd" id="2_7kc3c"]
 
 [sub_resource type="Animation" id="Animation_1kr7b"]
 resource_name = "walk"
@@ -81,3 +82,6 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_wlvsk")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("2_7kc3c")
