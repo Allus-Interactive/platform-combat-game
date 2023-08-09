@@ -9,7 +9,7 @@ func _ready():
 	SignalBus.connect("on_health_changed", on_signal_health_changed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func on_signal_health_changed(node : Node, amount_changed : int):
