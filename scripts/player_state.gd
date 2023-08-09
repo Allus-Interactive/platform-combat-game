@@ -9,6 +9,8 @@ var character : CharacterBody2D
 var playback : AnimationNodeStateMachinePlayback
 var next_state : PlayerState
 
+signal interrupt_state(new_state : PlayerState)
+
 func state_process(_delta):
 	pass
 

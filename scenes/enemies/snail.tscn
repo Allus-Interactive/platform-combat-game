@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm8exbu7yrhd2"]
+[gd_scene load_steps=18 format=3 uid="uid://cm8exbu7yrhd2"]
 
 [ext_resource type="Texture2D" uid="uid://d0tt1tfpdc81s" path="res://assets/enemies/snail/walk-Sheet.png" id="1_2854r"]
+[ext_resource type="Script" path="res://scenes/enemies/snail.gd" id="1_di8ad"]
 [ext_resource type="Texture2D" uid="uid://cajsiurcjb750" path="res://assets/enemies/snail/Dead-Sheet.png" id="1_v3kle"]
 [ext_resource type="Script" path="res://scripts/enemies/damageable.gd" id="2_7kc3c"]
 [ext_resource type="Script" path="res://scripts/character_state_machine.gd" id="4_sgwu1"]
 [ext_resource type="Script" path="res://scripts/player_state.gd" id="5_jx8yx"]
+[ext_resource type="Script" path="res://scripts/enemies/hit_state.gd" id="6_xjqcr"]
 
 [sub_resource type="Animation" id="Animation_qqf4w"]
 length = 0.001
@@ -132,6 +134,7 @@ transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition
 size = Vector2(30, 22)
 
 [node name="Snail" type="CharacterBody2D"]
+script = ExtResource("1_di8ad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v3kle")
@@ -166,5 +169,7 @@ script = ExtResource("5_jx8yx")
 script = ExtResource("5_jx8yx")
 can_move = false
 
-[node name="Hit" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("5_jx8yx")
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "dead_state")]
+script = ExtResource("6_xjqcr")
+damageable = NodePath("../../Damageable")
+dead_state = NodePath("../Dead")
