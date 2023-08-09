@@ -133,9 +133,10 @@ transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wlvsk"]
 size = Vector2(30, 22)
 
-[node name="Snail" type="CharacterBody2D"]
+[node name="Snail" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
 collision_layer = 4
 script = ExtResource("1_di8ad")
+hit_state = NodePath("CharacterStateMachine/Hit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v3kle")
@@ -170,10 +171,16 @@ script = ExtResource("5_jx8yx")
 script = ExtResource("5_jx8yx")
 can_move = false
 
-[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "dead_state")]
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "dead_state", "return_state")]
 script = ExtResource("6_xjqcr")
 damageable = NodePath("../../Damageable")
 dead_state = NodePath("../Dead")
+return_state = NodePath("../Walk")
 can_move = false
 
+[node name="Timer" type="Timer" parent="CharacterStateMachine/Hit"]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
