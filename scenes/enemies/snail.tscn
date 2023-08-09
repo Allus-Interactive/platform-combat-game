@@ -174,5 +174,6 @@ can_move = false
 script = ExtResource("6_xjqcr")
 damageable = NodePath("../../Damageable")
 dead_state = NodePath("../Dead")
+can_move = false
 
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]

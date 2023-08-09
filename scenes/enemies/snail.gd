@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animation_tree : AnimationTree = $AnimationTree
+@onready var state_machine : CharacterStateMachine = $CharacterStateMachine
 
 @export var starting_move_direction : Vector2 = Vector2.LEFT
 @export var movement_speed : float = 30.0
@@ -18,7 +19,7 @@ func _physics_process(delta):
 
 	# Set direction to the starting move direction vector
 	var direction : Vector2 = starting_move_direction
-	if direction:
+	if direction && state_machine.check_if_can_move():
 		velocity.x = direction.x * movement_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, movement_speed)
