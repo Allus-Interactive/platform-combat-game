@@ -134,6 +134,7 @@ transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition
 size = Vector2(30, 22)
 
 [node name="Snail" type="CharacterBody2D"]
+collision_layer = 4
 script = ExtResource("1_di8ad")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
