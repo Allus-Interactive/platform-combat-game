@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg3k0jpq56lu5"]
 
-[ext_resource type="Script" path="res://scripts/enemies/health_change_manager.gd" id="1_2xkty"]
+[ext_resource type="Script" path="res://scripts/UI/health_change_manager.gd" id="1_2xkty"]
 [ext_resource type="PackedScene" uid="uid://dnjd2fuqgueyv" path="res://scenes/UI/health_change_label.tscn" id="2_h17wv"]
 
 [node name="HealthChangeManager" type="Control"]

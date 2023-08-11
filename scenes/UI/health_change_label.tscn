@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dnjd2fuqgueyv"]
 
-[ext_resource type="Script" path="res://scripts/enemies/health_change_label.gd" id="1_br38y"]
+[ext_resource type="Script" path="res://scripts/UI/health_change_label.gd" id="1_br38y"]
 
 [node name="HealthChangeLabel" type="Label"]
 anchors_preset = 15
