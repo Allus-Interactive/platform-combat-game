@@ -1,12 +1,12 @@
-extends PlayerState
+extends State
 
 class_name GroundState
 
 @export var jump_velocity : float = -200.0
 @export var roll_speed : float = 400.0
-@export var air_state : PlayerState
-@export var roll_state : PlayerState
-@export var attack_state : PlayerState
+@export var air_state : State
+@export var roll_state : State
+@export var attack_state : State
 @export var jump_animation : String = "jump_start"
 @export var roll_animation : String = "roll"
 @export var attack_animation : String = "attack_1"

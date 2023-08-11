@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://g0aeaf7t8jn0"]
 
 [ext_resource type="Texture2D" uid="uid://diljjjyqvey23" path="res://assets/jungle/tileset/jungle tileset.png" id="1_tjtat"]
-[ext_resource type="PackedScene" uid="uid://c8g1576p2mopw" path="res://scenes/player.tscn" id="2_1uf6e"]
+[ext_resource type="PackedScene" uid="uid://c8g1576p2mopw" path="res://scenes/player/player.tscn" id="2_1uf6e"]
 [ext_resource type="PackedScene" uid="uid://cm8exbu7yrhd2" path="res://scenes/enemies/snail.tscn" id="3_4acwj"]
 [ext_resource type="PackedScene" uid="uid://cg3k0jpq56lu5" path="res://scenes/UI/health_change_manager.tscn" id="4_sr5u4"]
 

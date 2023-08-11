@@ -1,10 +1,10 @@
-extends PlayerState
+extends State
 
 class_name HitState
 
 @export var damageable : Damageable
-@export var dead_state : PlayerState
-@export var return_state : PlayerState
+@export var dead_state : State
+@export var return_state : State
 @export var dead_animation : String = "dead"
 @export var knockback_speed : float = 100.0
 

@@ -1,8 +1,8 @@
-extends PlayerState
+extends State
 
 class_name AttackState
 
-@export var return_state : PlayerState
+@export var return_state : State
 @export var attack_1_name : String = "attack_1"
 @export var attack_2_name : String = "attack_2"
 

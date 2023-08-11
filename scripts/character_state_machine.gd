@@ -3,14 +3,14 @@ extends Node
 class_name CharacterStateMachine
 
 @export var character : CharacterBody2D
-@export var current_state : PlayerState
+@export var current_state : State
 @export var animation_tree : AnimationTree
 
-var states : Array[PlayerState]
+var states : Array[State]
 
 func _ready():
 	for child in get_children():
-		if child is PlayerState:
+		if child is State:
 			states.append(child)
 			# Set the states up with what they need to function
 			child.character = character
@@ -33,7 +33,7 @@ func check_if_can_move():
 func check_if_is_rolling():
 	return current_state.is_rolling
 
-func switch_states(new_state : PlayerState):
+func switch_states(new_state : State):
 	if current_state != null:
 		current_state.on_exit()
 		current_state.next_state = null
@@ -45,6 +45,6 @@ func switch_states(new_state : PlayerState):
 func _input(event : InputEvent):
 	current_state.state_input(event)
 
-func on_state_interrupt_state(new_state : PlayerState):
+func on_state_interrupt_state(new_state : State):
 	switch_states(new_state)
 
