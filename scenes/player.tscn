@@ -621,6 +621,11 @@ air_state = NodePath("../Air")
 roll_state = NodePath("../Roll")
 attack_state = NodePath("../Attack")
 
+[node name="BufferTimer" type="Timer" parent="CharacterStateMachine/Ground"]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("12_k7mg6")
 landing_state = NodePath("../Landing")

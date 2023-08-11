@@ -11,15 +11,18 @@ class_name GroundState
 @export var roll_animation : String = "roll"
 @export var attack_animation : String = "attack_1"
 
+@onready var buffer_timer : Timer = $BufferTimer
+
 var is_facing_right : bool = true
 
 func state_process(_delta):
+	# check direction of player for roll velocity
 	if character.direction.x < 0:
 		is_facing_right = false
 	elif character.direction.x > 0:
 		is_facing_right = true
 	
-	if not character.is_on_floor():
+	if not character.is_on_floor() && buffer_timer.is_stopped():
 		next_state = air_state
 
 func state_input(event : InputEvent):
