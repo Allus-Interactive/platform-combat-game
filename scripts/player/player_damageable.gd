@@ -13,7 +13,7 @@ signal on_player_hit(node : Node, damage_taken : int, knockback_direction : Vect
 
 func hit(damage : int, knockback_direction : Vector2):
 	health -= damage
-	print_debug("player takes damage!")
+	
 	emit_signal("on_player_hit", get_parent(), damage, knockback_direction)
 
 func _on_animation_tree_animation_finished(anim_name):

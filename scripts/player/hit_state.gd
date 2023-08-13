@@ -1,17 +1,16 @@
 extends State
 
-class_name EnemyHitState
+class_name PlayerHitState
 
-@export var damageable : Damageable
+@export var damageable : PlayerDamageable
 @export var dead_state : State
 @export var return_state : State
-@export var dead_animation : String = "dead"
 @export var knockback_speed : float = 100.0
 
 @onready var timer : Timer = $Timer
 
 func _ready():
-	damageable.connect("on_hit", on_damagable_hit)
+	damageable.connect("on_player_hit", on_damagable_hit)
 
 func on_enter():
 	timer.start()
@@ -22,7 +21,8 @@ func on_damagable_hit(_node : Node, _damage_amount : int, knockback_direction : 
 		emit_signal("interrupt_state", self)
 	else:
 		emit_signal("interrupt_state", dead_state)
-		playback.travel(dead_animation)
+		print_debug('player is dead!')
+		# playback.travel("dead")
 
 func on_exit():
 	character.velocity = Vector2.ZERO

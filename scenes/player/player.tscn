@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=63 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -13,7 +13,9 @@
 [ext_resource type="Script" path="res://scripts/player/air_state.gd" id="12_k7mg6"]
 [ext_resource type="Script" path="res://scripts/player/attack-state.gd" id="13_cia2r"]
 [ext_resource type="Script" path="res://scripts/player/landing_state.gd" id="13_n5rx8"]
+[ext_resource type="Script" path="res://scripts/player/hit_state.gd" id="14_8lj70"]
 [ext_resource type="Script" path="res://scripts/player/state_debug_label.gd" id="14_g4e7r"]
+[ext_resource type="Script" path="res://scripts/state.gd" id="15_nw33h"]
 [ext_resource type="Script" path="res://scripts/player/sword.gd" id="15_wxpnc"]
 [ext_resource type="Script" path="res://scripts/player/facing_collision_shape.gd" id="16_551n7"]
 [ext_resource type="Script" path="res://scripts/player/player_damageable.gd" id="17_qyfxi"]
@@ -587,9 +589,10 @@ graph_offset = Vector2(33, -181)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0if30"]
 size = Vector2(12, 27)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
 collision_layer = 2
 script = ExtResource("1_ugb0v")
+hit_state = NodePath("CharacterStateMachine/Hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 2)
@@ -652,6 +655,20 @@ can_move = false
 wait_time = 0.2
 one_shot = true
 
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "dead_state", "return_state")]
+script = ExtResource("14_8lj70")
+damageable = NodePath("../../Damageable")
+dead_state = NodePath("../Dead")
+return_state = NodePath("../Ground")
+can_move = false
+
+[node name="Timer" type="Timer" parent="CharacterStateMachine/Hit"]
+wait_time = 0.25
+one_shot = true
+
+[node name="Dead" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("15_nw33h")
+
 [node name="State Debug Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -51.0
 offset_top = -43.0
@@ -680,4 +697,5 @@ script = ExtResource("17_qyfxi")
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Roll" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]
