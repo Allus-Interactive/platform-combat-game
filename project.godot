@@ -11,13 +11,18 @@ config_version=5
 [application]
 
 config/name="Platform Combat Game"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/parallax/title_screen.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SignalBus="*res://scripts/signal_bus.gd"
+
+[display]
+
+window/size/viewport_width=854
+window/size/viewport_height=480
 
 [input]
 
