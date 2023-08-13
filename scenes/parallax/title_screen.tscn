@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://drsqtqomqndrl"]
+[gd_scene load_steps=11 format=3 uid="uid://drsqtqomqndrl"]
 
 [ext_resource type="Script" path="res://scripts/parallax/title_screen_parallax.gd" id="1_js4be"]
 [ext_resource type="Texture2D" uid="uid://dne8gyqoc34c0" path="res://assets/title_screen/parallax/plx 1.png" id="2_3giws"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cvavjgtsyooba" path="res://assets/title_screen/parallax/plx 4.png" id="5_8u7i1"]
 [ext_resource type="Texture2D" uid="uid://bkpxpkt7n1673" path="res://assets/title_screen/parallax/plx 5.png" id="6_kmu1h"]
 [ext_resource type="Theme" uid="uid://dawghrdpbsvd6" path="res://assets/themes/title_theme.tres" id="7_ig4yg"]
+[ext_resource type="PackedScene" uid="uid://cl6kpcr88n2hc" path="res://scenes/UI/transitioner.tscn" id="8_v0xod"]
+[ext_resource type="PackedScene" uid="uid://g0aeaf7t8jn0" path="res://scenes/main.tscn" id="9_sc6vy"]
+[ext_resource type="Script" path="res://scripts/UI/transition_button.gd" id="10_7osat"]
 
 [node name="Title Screen" type="ParallaxBackground"]
 scroll_ignore_camera_zoom = true
@@ -60,15 +63,20 @@ Combat Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Label" parent="."]
-anchors_preset = -1
-anchor_top = 0.625
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Play Button" type="Button" parent="." node_paths=PackedStringArray("transitioner")]
+offset_left = 328.0
+offset_top = 320.0
+offset_right = 528.0
+offset_bottom = 416.0
 theme = ExtResource("7_ig4yg")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 text = "PLAY"
-horizontal_alignment = 1
+script = ExtResource("10_7osat")
+transitioner = NodePath("../Transitioner")
+
+[node name="Transitioner" parent="." instance=ExtResource("8_v0xod")]
+offset_top = 176.0
+offset_bottom = -168.0
+scene_to_load = ExtResource("9_sc6vy")
+
+[connection signal="pressed" from="Play Button" to="Play Button" method="_on_pressed"]
