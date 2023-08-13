@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4fhi51kwty75"
-path="res://.godot/imported/plx 1.png-b36b1d65f09b4bb5ecde3c28b1436fd7.ctex"
+uid="uid://kgatttiigsrb"
+path="res://.godot/imported/plx 2.png-a3edc16cfb6eceda47360fba45ceee96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/jungle/parallax/plx 1.png"
-dest_files=["res://.godot/imported/plx 1.png-b36b1d65f09b4bb5ecde3c28b1436fd7.ctex"]
+source_file="res://assets/title_screen/parallax/plx 2.png"
+dest_files=["res://.godot/imported/plx 2.png-a3edc16cfb6eceda47360fba45ceee96.ctex"]
 
 [params]
 
