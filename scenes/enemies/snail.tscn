@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cm8exbu7yrhd2"]
+[gd_scene load_steps=19 format=3 uid="uid://cm8exbu7yrhd2"]
 
 [ext_resource type="Texture2D" uid="uid://d0tt1tfpdc81s" path="res://assets/enemies/snail/walk-Sheet.png" id="1_2854r"]
 [ext_resource type="Script" path="res://scripts/enemies/snail.gd" id="1_di8ad"]
 [ext_resource type="Texture2D" uid="uid://cajsiurcjb750" path="res://assets/enemies/snail/Dead-Sheet.png" id="1_v3kle"]
 [ext_resource type="Script" path="res://scripts/enemies/damageable.gd" id="2_7kc3c"]
+[ext_resource type="Script" path="res://scripts/enemies/deal_damage.gd" id="4_4goyv"]
 [ext_resource type="Script" path="res://scripts/character_state_machine.gd" id="4_sgwu1"]
 [ext_resource type="Script" path="res://scripts/state.gd" id="5_jx8yx"]
 [ext_resource type="Script" path="res://scripts/enemies/hit_state.gd" id="6_xjqcr"]
@@ -155,6 +156,16 @@ anim_player = NodePath("../AnimationPlayer")
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_wlvsk")
 
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_4goyv")
+
+[node name="DamageCollision" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-1, 5)
+shape = SubResource("RectangleShape2D_wlvsk")
+debug_color = Color(0.792157, 0.0980392, 0.262745, 0.419608)
+
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("2_7kc3c")
 
@@ -183,4 +194,5 @@ wait_time = 0.25
 one_shot = true
 
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
+[connection signal="body_entered" from="DamageArea" to="DamageArea" method="_on_body_entered"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]

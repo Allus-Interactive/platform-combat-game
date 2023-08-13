@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=61 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/player/state_debug_label.gd" id="14_g4e7r"]
 [ext_resource type="Script" path="res://scripts/player/sword.gd" id="15_wxpnc"]
 [ext_resource type="Script" path="res://scripts/player/facing_collision_shape.gd" id="16_551n7"]
+[ext_resource type="Script" path="res://scripts/player/player_damageable.gd" id="17_qyfxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_35vab"]
 size = Vector2(19, 26)
@@ -593,6 +594,7 @@ script = ExtResource("1_ugb0v")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_35vab")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qv3v0")
@@ -660,7 +662,7 @@ script = ExtResource("14_g4e7r")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "facing_shape")]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 4
 script = ExtResource("15_wxpnc")
 player = NodePath("..")
@@ -669,7 +671,11 @@ facing_shape = NodePath("CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(17, 3)
 shape = SubResource("RectangleShape2D_0if30")
+debug_color = Color(0.764706, 0.0627451, 0.0784314, 0.419608)
 script = ExtResource("16_551n7")
+
+[node name="Damageable" type="Node" parent="."]
+script = ExtResource("17_qyfxi")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Roll" method="_on_animation_tree_animation_finished"]
