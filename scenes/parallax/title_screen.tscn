@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://drsqtqomqndrl"]
+
+[ext_resource type="Script" path="res://scripts/parallax/title_screen_parallax.gd" id="1_js4be"]
+[ext_resource type="Texture2D" uid="uid://d4fhi51kwty75" path="res://assets/jungle/parallax/plx 1.png" id="2_8c304"]
+[ext_resource type="Texture2D" uid="uid://bm1yulhitjgwv" path="res://assets/jungle/parallax/plx 2.png" id="3_4gcos"]
+[ext_resource type="Texture2D" uid="uid://cowqrdlfrrmvr" path="res://assets/jungle/parallax/plx 3.png" id="4_4khy8"]
+[ext_resource type="Texture2D" uid="uid://1xo2yd5xutqm" path="res://assets/jungle/parallax/plx 4.png" id="5_d0hbj"]
+[ext_resource type="Texture2D" uid="uid://dl7xce1i20ra8" path="res://assets/jungle/parallax/plx 5.png" id="6_bnggf"]
+[ext_resource type="Theme" uid="uid://dawghrdpbsvd6" path="res://assets/themes/title_theme.tres" id="7_ig4yg"]
+
+[node name="Title Screen" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_js4be")
+
+[node name="Base BG" type="Sprite2D" parent="."]
+position = Vector2(427, 240)
+texture = ExtResource("2_8c304")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("3_4gcos")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("4_4khy8")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+texture = ExtResource("5_d0hbj")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+texture = ExtResource("6_bnggf")
+centered = false
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.625
+theme = ExtResource("7_ig4yg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Untitled Platformer
+Combat Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Label" parent="."]
+anchors_preset = -1
+anchor_top = 0.625
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_ig4yg")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "PLAY"
+horizontal_alignment = 1
