@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=89 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -17,10 +17,11 @@
 [ext_resource type="Script" path="res://scripts/player/landing_state.gd" id="13_n5rx8"]
 [ext_resource type="Script" path="res://scripts/player/hit_state.gd" id="14_8lj70"]
 [ext_resource type="Script" path="res://scripts/player/state_debug_label.gd" id="14_g4e7r"]
-[ext_resource type="Script" path="res://scripts/state.gd" id="15_nw33h"]
+[ext_resource type="Script" path="res://scripts/player/dead_state.gd" id="15_r2poa"]
 [ext_resource type="Script" path="res://scripts/player/sword.gd" id="15_wxpnc"]
 [ext_resource type="Script" path="res://scripts/player/facing_collision_shape.gd" id="16_551n7"]
 [ext_resource type="Script" path="res://scripts/player/player_damageable.gd" id="17_qyfxi"]
+[ext_resource type="PackedScene" uid="uid://drsqtqomqndrl" path="res://scenes/parallax/title_screen.tscn" id="18_55s0b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_35vab"]
 size = Vector2(19, 26)
@@ -698,8 +699,8 @@ states/attack_1/node = SubResource("AnimationNodeAnimation_7p376")
 states/attack_1/position = Vector2(396, 239)
 states/attack_2/node = SubResource("AnimationNodeAnimation_dfivo")
 states/attack_2/position = Vector2(646, 239)
-states/death/node = SubResource("AnimationNodeAnimation_b87rm")
-states/death/position = Vector2(522, -253)
+states/dead/node = SubResource("AnimationNodeAnimation_b87rm")
+states/dead/position = Vector2(522, -253)
 states/double_jump/node = SubResource("AnimationNodeAnimation_iynau")
 states/double_jump/position = Vector2(396, -112)
 states/hurt/node = SubResource("AnimationNodeAnimation_0jei0")
@@ -716,7 +717,7 @@ states/move/node = SubResource("AnimationNodeBlendSpace1D_n51sq")
 states/move/position = Vector2(396, 100)
 states/roll/node = SubResource("AnimationNodeAnimation_cy70t")
 states/roll/position = Vector2(522, 23)
-transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_qqjmo"), "move", "jump_start", SubResource("AnimationNodeStateMachineTransition_37mn5"), "landing", "move", SubResource("AnimationNodeStateMachineTransition_mphnc"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_pcccu"), "jump_start", "jump_middle", SubResource("AnimationNodeStateMachineTransition_wnb84"), "jump_middle", "jump_end", SubResource("AnimationNodeStateMachineTransition_1hkf2"), "jump_end", "landing", SubResource("AnimationNodeStateMachineTransition_7ugl3"), "double_jump", "jump_middle", SubResource("AnimationNodeStateMachineTransition_qlm1h"), "jump_middle", "double_jump", SubResource("AnimationNodeStateMachineTransition_6itin"), "jump_end", "double_jump", SubResource("AnimationNodeStateMachineTransition_usg82"), "move", "roll", SubResource("AnimationNodeStateMachineTransition_adj4n"), "roll", "move", SubResource("AnimationNodeStateMachineTransition_2px0g"), "move", "attack_1", SubResource("AnimationNodeStateMachineTransition_dx0g2"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_6huml"), "attack_1", "move", SubResource("AnimationNodeStateMachineTransition_w6oaf"), "attack_2", "move", SubResource("AnimationNodeStateMachineTransition_i7kw8"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_86tal"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_1f07j"), "jump_start", "hurt", SubResource("AnimationNodeStateMachineTransition_3imy4"), "double_jump", "hurt", SubResource("AnimationNodeStateMachineTransition_i5nib"), "jump_middle", "hurt", SubResource("AnimationNodeStateMachineTransition_e3y0w"), "jump_end", "hurt", SubResource("AnimationNodeStateMachineTransition_v2fak"), "roll", "hurt", SubResource("AnimationNodeStateMachineTransition_kjfc7"), "landing", "hurt", SubResource("AnimationNodeStateMachineTransition_k8jq2"), "attack_1", "hurt", SubResource("AnimationNodeStateMachineTransition_c3a8t"), "attack_2", "hurt", SubResource("AnimationNodeStateMachineTransition_nxtdj"), "move", "death", SubResource("AnimationNodeStateMachineTransition_r3sat"), "jump_start", "death", SubResource("AnimationNodeStateMachineTransition_3xavc"), "double_jump", "death", SubResource("AnimationNodeStateMachineTransition_8ri5c"), "jump_middle", "death", SubResource("AnimationNodeStateMachineTransition_s10w2"), "jump_end", "death", SubResource("AnimationNodeStateMachineTransition_ik6b8"), "roll", "death", SubResource("AnimationNodeStateMachineTransition_v0uc0"), "landing", "death", SubResource("AnimationNodeStateMachineTransition_nr86c"), "attack_2", "death", SubResource("AnimationNodeStateMachineTransition_4ordd"), "attack_1", "death", SubResource("AnimationNodeStateMachineTransition_1ij5n")]
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_qqjmo"), "move", "jump_start", SubResource("AnimationNodeStateMachineTransition_37mn5"), "landing", "move", SubResource("AnimationNodeStateMachineTransition_mphnc"), "jump_start", "double_jump", SubResource("AnimationNodeStateMachineTransition_pcccu"), "jump_start", "jump_middle", SubResource("AnimationNodeStateMachineTransition_wnb84"), "jump_middle", "jump_end", SubResource("AnimationNodeStateMachineTransition_1hkf2"), "jump_end", "landing", SubResource("AnimationNodeStateMachineTransition_7ugl3"), "double_jump", "jump_middle", SubResource("AnimationNodeStateMachineTransition_qlm1h"), "jump_middle", "double_jump", SubResource("AnimationNodeStateMachineTransition_6itin"), "jump_end", "double_jump", SubResource("AnimationNodeStateMachineTransition_usg82"), "move", "roll", SubResource("AnimationNodeStateMachineTransition_adj4n"), "roll", "move", SubResource("AnimationNodeStateMachineTransition_2px0g"), "move", "attack_1", SubResource("AnimationNodeStateMachineTransition_dx0g2"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_6huml"), "attack_1", "move", SubResource("AnimationNodeStateMachineTransition_w6oaf"), "attack_2", "move", SubResource("AnimationNodeStateMachineTransition_i7kw8"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_86tal"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_1f07j"), "jump_start", "hurt", SubResource("AnimationNodeStateMachineTransition_3imy4"), "double_jump", "hurt", SubResource("AnimationNodeStateMachineTransition_i5nib"), "jump_middle", "hurt", SubResource("AnimationNodeStateMachineTransition_e3y0w"), "jump_end", "hurt", SubResource("AnimationNodeStateMachineTransition_v2fak"), "roll", "hurt", SubResource("AnimationNodeStateMachineTransition_kjfc7"), "landing", "hurt", SubResource("AnimationNodeStateMachineTransition_k8jq2"), "attack_1", "hurt", SubResource("AnimationNodeStateMachineTransition_c3a8t"), "attack_2", "hurt", SubResource("AnimationNodeStateMachineTransition_nxtdj"), "move", "dead", SubResource("AnimationNodeStateMachineTransition_r3sat"), "jump_start", "dead", SubResource("AnimationNodeStateMachineTransition_3xavc"), "double_jump", "dead", SubResource("AnimationNodeStateMachineTransition_8ri5c"), "jump_middle", "dead", SubResource("AnimationNodeStateMachineTransition_s10w2"), "jump_end", "dead", SubResource("AnimationNodeStateMachineTransition_ik6b8"), "roll", "dead", SubResource("AnimationNodeStateMachineTransition_v0uc0"), "landing", "dead", SubResource("AnimationNodeStateMachineTransition_nr86c"), "attack_2", "dead", SubResource("AnimationNodeStateMachineTransition_4ordd"), "attack_1", "dead", SubResource("AnimationNodeStateMachineTransition_1ij5n")]
 graph_offset = Vector2(-86, -299)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0if30"]
@@ -800,7 +801,13 @@ wait_time = 0.25
 one_shot = true
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("15_nw33h")
+script = ExtResource("15_r2poa")
+scene_after_death = ExtResource("18_55s0b")
+can_move = false
+
+[node name="Timer" type="Timer" parent="CharacterStateMachine/Dead"]
+wait_time = 2.0
+one_shot = true
 
 [node name="State Debug Label" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -51.0
@@ -831,4 +838,5 @@ script = ExtResource("17_qyfxi")
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Roll" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Dead/Timer" to="CharacterStateMachine/Dead" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]

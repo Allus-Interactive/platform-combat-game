@@ -19,10 +19,10 @@ func on_damagable_hit(_node : Node, _damage_amount : int, knockback_direction : 
 	if damageable.health > 0:
 		character.velocity = knockback_speed * knockback_direction
 		emit_signal("interrupt_state", self)
+		playback.travel("hurt")
 	else:
 		emit_signal("interrupt_state", dead_state)
-		print_debug('player is dead!')
-		# playback.travel("dead")
+		playback.travel("dead")
 
 func on_exit():
 	character.velocity = Vector2.ZERO
