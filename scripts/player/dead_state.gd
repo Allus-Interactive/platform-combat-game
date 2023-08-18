@@ -10,9 +10,11 @@ func on_enter():
 	timer.start()
 
 func _on_timer_timeout():
-	print_debug("Scene after death: ", scene_after_death)
-	if scene_after_death != null:
-		# TODO: Create Game Over/Death scene
-		get_tree().change_scene_to_packed(scene_after_death)
-	else:
-		push_warning("There is nowhere to go after death")
+	pass
+	# TODO: reload current scene
+	
+#	print_debug("Scene after death: ", scene_after_death)
+#	if scene_after_death != null:
+#		get_tree().change_scene_to_packed(scene_after_death)
+#	else:
+#		push_warning("There is nowhere to go after death")

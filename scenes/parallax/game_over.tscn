@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://dp3og3ppvue7y"]
+
+[ext_resource type="Script" path="res://scripts/parallax/title_screen_parallax.gd" id="1_3p417"]
+[ext_resource type="Texture2D" uid="uid://dne8gyqoc34c0" path="res://assets/title_screen/parallax/plx 1.png" id="2_s5m2p"]
+[ext_resource type="Texture2D" uid="uid://kgatttiigsrb" path="res://assets/title_screen/parallax/plx 2.png" id="3_xchta"]
+[ext_resource type="Texture2D" uid="uid://cciknbahoxlx2" path="res://assets/title_screen/parallax/plx 3.png" id="4_vytl1"]
+[ext_resource type="Texture2D" uid="uid://cvavjgtsyooba" path="res://assets/title_screen/parallax/plx 4.png" id="5_kw2r8"]
+[ext_resource type="Texture2D" uid="uid://bkpxpkt7n1673" path="res://assets/title_screen/parallax/plx 5.png" id="6_jyq6r"]
+[ext_resource type="Theme" uid="uid://dawghrdpbsvd6" path="res://assets/themes/title_theme.tres" id="7_6pqen"]
+[ext_resource type="Script" path="res://scripts/UI/transition_button.gd" id="8_8iowa"]
+[ext_resource type="PackedScene" uid="uid://cl6kpcr88n2hc" path="res://scenes/UI/transitioner.tscn" id="9_tneke"]
+[ext_resource type="PackedScene" uid="uid://g0aeaf7t8jn0" path="res://scenes/main.tscn" id="10_730k3"]
+
+[node name="Title Screen" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_3p417")
+
+[node name="Base BG" type="Sprite2D" parent="."]
+position = Vector2(427, 240)
+texture = ExtResource("2_s5m2p")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("3_xchta")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("4_vytl1")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+texture = ExtResource("5_kw2r8")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(854, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+texture = ExtResource("6_jyq6r")
+centered = false
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.625
+theme = ExtResource("7_6pqen")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "You have died!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play Button" type="Button" parent="." node_paths=PackedStringArray("transitioner")]
+offset_left = 328.0
+offset_top = 320.0
+offset_right = 528.0
+offset_bottom = 416.0
+theme = ExtResource("7_6pqen")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+text = "PLAY"
+script = ExtResource("8_8iowa")
+transitioner = NodePath("../Transitioner")
+
+[node name="Transitioner" parent="." instance=ExtResource("9_tneke")]
+offset_top = 176.0
+offset_bottom = -168.0
+scene_to_load = ExtResource("10_730k3")
+
+[connection signal="pressed" from="Play Button" to="Play Button" method="_on_pressed"]
