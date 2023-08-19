@@ -210,10 +210,11 @@ anim_player = NodePath("../AnimationPlayer")
 position = Vector2(-1, 5)
 shape = SubResource("RectangleShape2D_wlvsk")
 
-[node name="DamageArea" type="Area2D" parent="."]
+[node name="DamageArea" type="Area2D" parent="." node_paths=PackedStringArray("dead_state")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("4_4goyv")
+dead_state = NodePath("../CharacterStateMachine/Dead")
 
 [node name="DamageCollision" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2(-1, 5)
