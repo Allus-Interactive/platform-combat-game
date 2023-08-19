@@ -1346,14 +1346,6 @@ drag_vertical_enabled = true
 [node name="Snail" parent="." instance=ExtResource("3_4acwj")]
 position = Vector2(277, 181)
 
-[node name="Snail2" parent="." node_paths=PackedStringArray("hit_state") instance=ExtResource("3_4acwj")]
-position = Vector2(432, 180)
-hit_state = NodePath("../Snail/CharacterStateMachine/Hit")
-
-[node name="Snail3" parent="." node_paths=PackedStringArray("hit_state") instance=ExtResource("3_4acwj")]
-position = Vector2(567, 181)
-hit_state = NodePath("../Snail/CharacterStateMachine/Hit")
-
 [node name="HealthChangeManager" parent="." instance=ExtResource("4_sr5u4")]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("5_gtyg4")]

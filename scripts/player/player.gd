@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed : float = 200.0
+@export var hit_state : State
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -29,7 +30,7 @@ func _physics_process(delta):
 		velocity.x = direction.x * speed
 	elif state_machine.check_if_is_rolling():
 		pass # do nothing, velocity is controlled in the roll function
-	else:
+	elif state_machine.current_state != hit_state:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
 	move_and_slide()
