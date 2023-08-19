@@ -10,9 +10,10 @@ func on_enter():
 	timer.start()
 
 func _on_timer_timeout():
-	pass
-	# TODO: reload current scene
+	# reload current scene
 	get_tree().reload_current_scene()
+	
+	# TODO: investigate best way to reload scene
 #	print_debug("Scene after death: ", scene_after_death)
 #	if scene_after_death != null:
 #		get_tree().change_scene_to_packed(scene_after_death)
