@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://c8g1576p2mopw"]
+[gd_scene load_steps=88 format=3 uid="uid://c8g1576p2mopw"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_ugb0v"]
 [ext_resource type="Texture2D" uid="uid://2875m6xnioh3" path="res://assets/player/player_idle.png" id="2_2tdic"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" path="res://scripts/player/sword.gd" id="15_wxpnc"]
 [ext_resource type="Script" path="res://scripts/player/facing_collision_shape.gd" id="16_551n7"]
 [ext_resource type="Script" path="res://scripts/player/player_damageable.gd" id="17_qyfxi"]
-[ext_resource type="PackedScene" uid="uid://dp3og3ppvue7y" path="res://scenes/parallax/game_over.tscn" id="18_q8b52"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_35vab"]
 size = Vector2(19, 26)
@@ -802,7 +801,6 @@ one_shot = true
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("15_r2poa")
-scene_after_death = ExtResource("18_q8b52")
 can_move = false
 
 [node name="Timer" type="Timer" parent="CharacterStateMachine/Dead"]
