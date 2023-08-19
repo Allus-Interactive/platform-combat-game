@@ -1344,9 +1344,6 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Snail" parent="." instance=ExtResource("3_4acwj")]
-position = Vector2(277, 181)
-
 [node name="HealthChangeManager" parent="." instance=ExtResource("4_sr5u4")]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("5_gtyg4")]
@@ -1354,3 +1351,13 @@ position = Vector2(277, 181)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Transitioner" parent="CanvasLayer" instance=ExtResource("6_cgu3t")]
+metadata/_edit_lock_ = true
+
+[node name="Snail" parent="." instance=ExtResource("3_4acwj")]
+position = Vector2(297, 179)
+
+[node name="Snail2" parent="." instance=ExtResource("3_4acwj")]
+position = Vector2(447, 179)
+
+[node name="Snail3" parent="." instance=ExtResource("3_4acwj")]
+position = Vector2(584, 178)
